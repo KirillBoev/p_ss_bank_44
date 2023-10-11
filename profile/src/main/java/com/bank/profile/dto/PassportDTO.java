@@ -6,6 +6,7 @@ import java.sql.Date;
 
 @Data
 public class PassportDTO {
+    private Long Id;
 
     private Integer series;
 

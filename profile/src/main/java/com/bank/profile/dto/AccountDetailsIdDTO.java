@@ -5,6 +5,7 @@ import lombok.Data;
 
 @Data
 public class AccountDetailsIdDTO {
+    private Long Id;
     private Long accountId;
     private Profile profileId;
 }
