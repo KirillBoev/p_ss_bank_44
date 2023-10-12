@@ -3,6 +3,7 @@ package com.bank.profile.controller;
 import com.bank.profile.dto.ProfileDTO;
 import com.bank.profile.entity.Profile;
 import com.bank.profile.service.profileService.ProfileService;
+import io.micrometer.core.annotation.Timed;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -37,6 +38,7 @@ public class ProfileController {
                             mediaType = "application/json",
                             array = @ArraySchema(schema = @Schema(implementation = ProfileDTO.class)))
             })
+    @Timed("gettingAllProfiles")
     @GetMapping("/all")
     public ResponseEntity<List<Profile>> getAllProfiles() {
         return ResponseEntity.ok(profileService.getAllProfiles());
@@ -51,6 +53,7 @@ public class ProfileController {
                             mediaType = "application/json",
                             array = @ArraySchema(schema = @Schema(implementation = ProfileDTO.class)))
             })
+    @Timed("createProfile")
     @PostMapping("/create")
     public ResponseEntity<ProfileDTO> createProfile(@RequestBody ProfileDTO profileDTO) {
         return ResponseEntity.ok(profileService.createProfile(profileDTO));
@@ -64,6 +67,7 @@ public class ProfileController {
                             mediaType = "application/json",
                             array = @ArraySchema(schema = @Schema(implementation = ProfileDTO.class)))
             })
+    @Timed("updateProfile")
     @PutMapping("/update/{id}")
     public ResponseEntity<ProfileDTO> updateProfile(@PathVariable Long id, @RequestBody ProfileDTO profileDTO) {
         return ResponseEntity.ok(profileService.updateProfile(id, profileDTO));
@@ -77,6 +81,7 @@ public class ProfileController {
                             mediaType = "application/json",
                             array = @ArraySchema(schema = @Schema(implementation = ProfileDTO.class)))
             })
+    @Timed("deleteProfile")
     @DeleteMapping("/delete/{id}")
     public HttpStatus deleteProfile(@PathVariable Long id) {
         profileService.deleteProfile(id);
